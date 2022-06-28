@@ -1,10 +1,5 @@
 import livingobjects.Animal;
 import livingobjects.Plant;
-import livingobjects.Utils;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
@@ -37,19 +32,8 @@ public class StatisticsTask implements Runnable{
             result.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
         }
 
-
-
-
-
         for (ConcurrentMap.Entry<String,Long> entry:plantsMap.entrySet()) {
             result.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
-        }
-
-        if (Utils.oldAnimalsPopulation.equals(""))
-            Utils.oldAnimalsPopulation = result.toString();
-        else {
-            if(Utils.oldAnimalsPopulation.equals(result.toString()))
-                System.out.println("Зациклилось!");
         }
 
         System.out.println("Island statistic:\n" + result.toString());

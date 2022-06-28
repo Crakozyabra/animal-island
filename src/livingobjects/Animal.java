@@ -1,14 +1,11 @@
 package livingobjects;
 
 import livingobjects.animals.Herbivore;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Animal {
-    public boolean mark;
+    public boolean mark; // для отслеживания животного
     private final int id; // id
     private final double weight; // вес
     private final int maxCountInOneCell; // максимальное кол-во животных этого типа в ячейке
@@ -98,7 +95,7 @@ public abstract class Animal {
         }
     }
 
-    public void eat(List<Plant> plants){
+    public void eat(CopyOnWriteArrayList<Plant> plants){
         if (plants != null && this instanceof Herbivore && plants.size() > 0) {
             this.toSaturate(plants.get(0));
             plants.remove(0);
@@ -126,17 +123,10 @@ public abstract class Animal {
         return weight;
     }
 
-    public int getMaxCountInOneCell() {
-        return maxCountInOneCell;
-    }
-
     public int getCellPerMoveSpeedNoMore() {
         return cellPerMoveSpeedNoMore;
     }
 
-    public double getFoodForFullSaturation() {
-        return foodForFullSaturation;
-    }
     public int getId() {
         return id;
     }

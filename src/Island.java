@@ -2,12 +2,6 @@ import livingobjects.Animal;
 import livingobjects.AnimalFactory;
 import livingobjects.Plant;
 import livingobjects.Utils;
-import livingobjects.animals.predators.Bear;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -46,10 +40,6 @@ public class Island {
                 animals.add(animalFactory.createAnimal(animalId));
             }
         }
-        Bear b = new Bear();
-        b.mark = true;
-        CopyOnWriteArrayList<Animal> animals = animalsOnIsland.get("10|10");
-        animals.add(b);
     }
 
     public Island() {

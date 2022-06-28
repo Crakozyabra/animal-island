@@ -1,7 +1,4 @@
-import livingobjects.animals.predators.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.*;
 
 /*
@@ -18,8 +15,8 @@ public class Solution {
 
         Island island = new Island();
         island.populateTheIsland();
-        plantsGrow.scheduleAtFixedRate(new PlantsGrowTask(island), 1, 100, TimeUnit.MILLISECONDS);//1000
-        statistics.scheduleAtFixedRate(new StatisticsTask(island), 1, 300, TimeUnit.MILLISECONDS);//3000
-        animalsLife.scheduleAtFixedRate(new AnimalsLifeCycleTask(island), 1, 200, TimeUnit.MILLISECONDS);//2000
+        plantsGrow.scheduleAtFixedRate(new PlantsGrowTask(island), 1, 1000, TimeUnit.MILLISECONDS);
+        statistics.scheduleAtFixedRate(new StatisticsTask(island), 1, 3000, TimeUnit.MILLISECONDS);
+        animalsLife.scheduleAtFixedRate(new AnimalsLifeCycleTask(island), 1, 2000, TimeUnit.MILLISECONDS);
     }
 }

@@ -1,12 +1,7 @@
 package livingobjects;
 
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicIntegerArray;
+
 
 public class Utils {
 
@@ -95,11 +90,5 @@ public class Utils {
         put(13,200); // id=13 duck
         put(14,1000);// id=14 caterpillar
     }};
-
-
-    public static String oldAnimalsPopulation = "";
-
-
-
 
 }

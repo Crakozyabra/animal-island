@@ -1,8 +1,8 @@
 package livingobjects;
 
 public class Plant{
-    private int id = 15;
-    private double weight = 1;
+    private final int id = 15;
+    private final double weight = 1;
 
 
     public String getSimpleClassName() {

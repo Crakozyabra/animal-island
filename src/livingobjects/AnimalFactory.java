@@ -1,6 +1,5 @@
 package livingobjects;
 
-import livingobjects.Animal;
 import livingobjects.animals.herbivores.*;
 import livingobjects.animals.predators.*;
 

@@ -1,9 +1,7 @@
 import livingobjects.*;
 
-import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
+
 
 public class AnimalsLifeCycleTask implements Runnable{
 
@@ -12,6 +10,7 @@ public class AnimalsLifeCycleTask implements Runnable{
     public AnimalsLifeCycleTask(Island island) {
         this.island = island;
     }
+
 
     @Override
     public void run() {
@@ -23,6 +22,7 @@ public class AnimalsLifeCycleTask implements Runnable{
             }
         }
     }
+
 
     // животные едят в ячейке острова
     private void animalsEatInIslandCell(Integer xCoordinate, Integer yCoordinate){
@@ -44,11 +44,6 @@ public class AnimalsLifeCycleTask implements Runnable{
         //System.out.println("end eat");
     }
 
-    private boolean canBeEaten(Animal whoEat, Animal eat){
-        int probability = Utils.probability[whoEat.getId()][eat.getId()];
-        int factProbability = ThreadLocalRandom.current().nextInt(0,100);
-        return probability > factProbability;
-    }
 
     // животные размножаются в ячейке острова
     private void animalsMultiplyInIslandCell(Integer xCoordinate, Integer yCoordinate){
@@ -58,12 +53,16 @@ public class AnimalsLifeCycleTask implements Runnable{
         CopyOnWriteArrayList<Animal> animalsChildren = new CopyOnWriteArrayList<>();
         for (Animal firstParent:animals) {
             for (Animal secondParent: animals) {
+                //System.out.println("before multiply");
                 CopyOnWriteArrayList<Animal> children = firstParent.multiply(secondParent);
-                if (children != null && !children.isEmpty())
+                if (children != null && !children.isEmpty()) {
+                    //System.out.println(children.size());
                     animalsChildren.addAll(children);
+                }
             }
         }
         animals.addAll(animalsChildren);
+
         trimToAnimalsCellLimit(animals);
         //System.out.println("end multiply");
     }
