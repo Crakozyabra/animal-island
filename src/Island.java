@@ -22,13 +22,7 @@ public class Island {
     public CopyOnWriteArrayList<Plant> getPlantsOnIslandInCell(String cell) {
         return plantsOnIsland.get(cell);
     }
-    public void setAnimalsOnIslandInCell(String cell, CopyOnWriteArrayList<Animal> animals) {
-        animalsOnIsland.put(cell, animals);
-    }
 
-    public void setPlantsOnIslandInCell(String cell, CopyOnWriteArrayList<Plant> plants) {
-        plantsOnIsland.put(cell, plants);
-    }
 
     public void populateTheIsland() {
         AnimalFactory animalFactory = new AnimalFactory();
