@@ -1,8 +1,5 @@
 package livingobjects;
 
-import livingobjects.animals.herbivores.*;
-import livingobjects.animals.predators.*;
-
 public class AnimalFactory {
     public Animal createAnimal(int id){
 
@@ -10,49 +7,49 @@ public class AnimalFactory {
 
         switch (id) {
             case 0:
-                animal = new Wolf();
+                animal = new Predator.Wolf();
                 break;
             case 1:
-                animal = new Boa();
+                animal = new Predator.Boa();
                 break;
             case 2:
-                animal = new Fox();
+                animal = new Predator.Fox();
                 break;
             case 3:
-                animal =  new Bear();
+                animal =  new Predator.Bear();
                 break;
             case 4:
-                animal = new Eagle();
+                animal = new Predator.Eagle();
                 break;
             case 5:
-                animal = new Horse();
+                animal = new Herbivore.Horse();
                 break;
             case 6:
-                animal = new Deer();
+                animal = new Herbivore.Deer();
                 break;
             case 7:
-                animal =  new Rabbit();
+                animal =  new Herbivore.Rabbit();
                 break;
             case 8:
-                animal = new Mouse();
+                animal = new Herbivore.Mouse();
                 break;
             case 9:
-                animal = new Goat();
+                animal = new Herbivore.Goat();
                 break;
             case 10:
-                animal = new Sheep();
+                animal = new Herbivore.Sheep();
                 break;
             case 11:
-                animal = new Boar();
+                animal = new Herbivore.Boar();
                 break;
             case 12:
-                animal = new Buffalo();
+                animal = new Herbivore.Buffalo();
                 break;
             case 13:
-                animal = new Duck();
+                animal = new Herbivore.Duck();
                 break;
             case 14:
-                animal = new Caterpillar();
+                animal = new Herbivore.Caterpillar();
                 break;
         }
 

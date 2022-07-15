@@ -2,6 +2,8 @@ import livingobjects.Animal;
 import livingobjects.AnimalFactory;
 import livingobjects.Plant;
 import livingobjects.Utils;
+
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ThreadLocalRandom;

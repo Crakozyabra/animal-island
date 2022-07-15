@@ -1,5 +1,7 @@
 import livingobjects.*;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -26,7 +28,7 @@ public class AnimalsLifeCycleTask implements Runnable{
 
     // животные едят в ячейке острова
     private void animalsEatInIslandCell(Integer xCoordinate, Integer yCoordinate){
-        //System.out.println("start eat");
+
         CopyOnWriteArrayList<Animal> animals = island.getAnimalsOnIslandInCell(xCoordinate+"|"+yCoordinate);
         CopyOnWriteArrayList<Plant> plants = island.getPlantsOnIslandInCell(xCoordinate+"|"+yCoordinate);
         for (Animal currentAnimal:animals) {
@@ -40,31 +42,40 @@ public class AnimalsLifeCycleTask implements Runnable{
                 }
             }
         }
+
         animals.removeIf(Animal::isAnimalIsDead);
-        //System.out.println("end eat");
+
     }
 
 
     // животные размножаются в ячейке острова
     private void animalsMultiplyInIslandCell(Integer xCoordinate, Integer yCoordinate){
 
-        //System.out.println("start multiply");
+
         CopyOnWriteArrayList<Animal> animals = island.getAnimalsOnIslandInCell(xCoordinate+"|"+yCoordinate);
         CopyOnWriteArrayList<Animal> animalsChildren = new CopyOnWriteArrayList<>();
         for (Animal firstParent:animals) {
+            if (firstParent.isHasChildrenOnThisMove()) continue;
             for (Animal secondParent: animals) {
-                //System.out.println("before multiply");
+                if (secondParent.isHasChildrenOnThisMove()) continue;
+
                 CopyOnWriteArrayList<Animal> children = firstParent.multiply(secondParent);
+                firstParent.setHasChildrenOnThisMove(true);
+                secondParent.setHasChildrenOnThisMove(true);
+
                 if (children != null && !children.isEmpty()) {
-                    //System.out.println(children.size());
                     animalsChildren.addAll(children);
                 }
             }
+
         }
         animals.addAll(animalsChildren);
 
+        for (Animal animal:animals) {
+            animal.setHasChildrenOnThisMove(false);
+        }
+
         trimToAnimalsCellLimit(animals);
-        //System.out.println("end multiply");
     }
 
     private CopyOnWriteArrayList<Animal> getAnimalsChildren(int id) {
@@ -85,14 +96,16 @@ public class AnimalsLifeCycleTask implements Runnable{
         long animalsDifferenceCount = animalsIdCount - animalsIdMaxCount;
         for (Animal animal:animals) {
             if (animalsDifferenceCount==0) break;
-            if (animal.getId() == id && animalsDifferenceCount > 0) animals.remove(animal);
+            if (animal.getId() == id && animalsDifferenceCount > 0){
+                animals.remove(animal);
+            }
             animalsDifferenceCount--;
         }
     }
 
     // животные передвигаются на другие ячейки острова
     private void animalsMoveFromCell(Integer xCoordinate, Integer yCoordinate) {
-        //System.out.println("start move");
+
         CopyOnWriteArrayList<Animal> animalsInOldCell = island.getAnimalsOnIslandInCell(xCoordinate+"|"+yCoordinate);
 
         for (Animal animal:animalsInOldCell) {
@@ -107,7 +120,7 @@ public class AnimalsLifeCycleTask implements Runnable{
                 animalsInOldCell.remove(animal);
             }
         }
-        //System.out.println("end move");
+
     }
 
     private String newCellCoordinate(Direction direction, int stepCount, int xCoordinate, int yCoordinate) {
@@ -115,19 +128,19 @@ public class AnimalsLifeCycleTask implements Runnable{
 
         switch (direction) {
             case RIGHT:
-                xCoordinate = xCoordinate + stepCount >= 0?xCoordinate + stepCount:xCoordinate;
+                xCoordinate = xCoordinate + stepCount >= Utils.xIslandSize ? xCoordinate:xCoordinate + stepCount;
                 break;
             case UP:
-                yCoordinate = yCoordinate + stepCount >= 0?yCoordinate + stepCount:yCoordinate;
+                yCoordinate = yCoordinate + stepCount >= Utils.yIslandSize ? yCoordinate:yCoordinate + stepCount;
                 break;
             case LEFT:
-                xCoordinate = xCoordinate - stepCount >=0?xCoordinate - stepCount:xCoordinate;
+                xCoordinate = xCoordinate - stepCount >= 0 ? xCoordinate - stepCount:xCoordinate;
                 break;
             case DOWN:
-                yCoordinate = yCoordinate - stepCount>=0?yCoordinate - stepCount:yCoordinate;
+                yCoordinate = yCoordinate - stepCount >= 0 ? yCoordinate - stepCount:yCoordinate;
                 break;
             default:
-                yCoordinate = yCoordinate - stepCount>=0?yCoordinate - stepCount:yCoordinate;
+                yCoordinate = yCoordinate - stepCount >=0 ? yCoordinate - stepCount:yCoordinate;
                 break;
         }
 

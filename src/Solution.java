@@ -15,7 +15,7 @@ public class Solution {
 
         Island island = new Island();
         island.populateTheIsland();
-        plantsGrow.scheduleAtFixedRate(new PlantsGrowTask(island), 1, 1000, TimeUnit.MILLISECONDS);
+        plantsGrow.scheduleAtFixedRate(new PlantsGrowTask(island), 1, 100, TimeUnit.MILLISECONDS);
         statistics.scheduleAtFixedRate(new StatisticsTask(island), 1, 3000, TimeUnit.MILLISECONDS);
         animalsLife.scheduleAtFixedRate(new AnimalsLifeCycleTask(island), 1, 2000, TimeUnit.MILLISECONDS);
     }
