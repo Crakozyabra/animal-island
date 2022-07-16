@@ -1,13 +1,14 @@
 package livingobjects;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 
 public class Utils {
 
     // размер острова
-    public static final int xIslandSize = 100;
-    public static final int yIslandSize = 20;
+    public static final int xIslandSize = 15;
+    public static final int yIslandSize = 30;
 
 
     // вероятность съедения строкой столбца
@@ -85,4 +86,33 @@ public class Utils {
         put(13,200); // id=13 duck
         put(14,1000);// id=14 caterpillar
     }};
+
+    // значки животных и растений
+    public static final ConcurrentHashMap<Integer, String> iconsOfAnimlsAndPlants = new ConcurrentHashMap<>() {{
+        put(0,"\uD83D\uDC3A");   // id=0  wolf
+        put(1,"\uD83D\uDC0D");   // id=1  boa
+        put(2,"\uD83E\uDD8A");   // id=2  fox
+        put(3,"\uD83D\uDC3B");   // id=3  bear
+        put(4,"\uD83E\uDD85");   // id=4  eagle
+        put(5,"\uD83D\uDC0E");   // id=5  horse
+        put(6,"\uD83E\uDD8C");   // id=6  deer
+        put(7,"\uD83D\uDC07");   // id=7  rabbit
+        put(8,"\uD83D\uDC01");   // id=8  mouse
+        put(9,"\uD83D\uDC10");   // id=9  goat
+        put(10,"\uD83D\uDC11");  // id=10 sheep
+        put(11,"\uD83D\uDC17");  // id=11 boar
+        put(12,"\uD83D\uDC03");  // id=12 buffalo
+        put(13,"\uD83E\uDD86");  // id=13 duck
+        put(14,"\uD83D\uDC1B");  // id=14 caterpillar
+    }};
+
+
+    public static String getIconString(){
+        String str = "";
+        for (Map.Entry<Integer,String> stringEntry:iconsOfAnimlsAndPlants.entrySet()) {
+            str = str + stringEntry.getValue();
+        }
+        return str;
+    }
+
 }
