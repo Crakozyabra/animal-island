@@ -64,8 +64,10 @@ public class Solution extends Application{
         Island island = new Island();
         island.populateTheIsland();
         plantsGrow.scheduleAtFixedRate(new PlantsGrowTask(island), 1, 1000, TimeUnit.MILLISECONDS);
-        statistics.scheduleAtFixedRate(new StatisticsTask(island, animalsOnIslandForGUI), 1, 2000, TimeUnit.MILLISECONDS);
-        animalsLife.scheduleAtFixedRate(new AnimalsLifeCycleTask(island), 1, 3000, TimeUnit.MILLISECONDS);
+        try {
+            statistics.scheduleAtFixedRate(new StatisticsTask(island, animalsOnIslandForGUI), 1, 3000, TimeUnit.MILLISECONDS);
+        } catch (Exception exception) {}
+        animalsLife.scheduleAtFixedRate(new AnimalsLifeCycleTask(island), 1, 5000, TimeUnit.MILLISECONDS);
 
         Scene scene = new Scene(scrollPane,1366,768);
         stage.setScene(scene);
